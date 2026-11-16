@@ -1,0 +1,9 @@
+{
+  "strings": {
+    "title": "喝水",
+    "add": "+1 杯",
+    "reset": "重置",
+    "goal_reached": "目标达成！",
+    "of_goal": "目标 8 杯"
+  }
+}

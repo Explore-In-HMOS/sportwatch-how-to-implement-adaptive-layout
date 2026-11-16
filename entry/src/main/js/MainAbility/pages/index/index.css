@@ -1,0 +1,430 @@
+/*
+ * Adaptive layout, handled entirely in CSS. Four tiers, applied in order:
+ *
+ *   1. Base rules ............ round watches, 454/466 px (GT 2 46 mm, GT 3 to GT 6)
+ *   2. round + max-width 400 .. small round watches, 390 px (GT 2 42 mm)
+ *   3. round-screen: false .... square watches, 408 x 480 (FIT 3/4/5, D 2)
+ *   4. square + max-width 370 . narrow square watches, 336 x 480 (FIT 2)
+ *
+ * Tier 4 also matches tier 3, so it comes last and wins.
+ *
+ * What changes between round and square:
+ *   Horizontal: content block centred (round) vs left-anchored with a 4-5 % left margin
+ *               (square); count and label stacked (column) vs side by side (row);
+ *               buttons stacked vs side by side with space-between; text centred vs left.
+ *   Vertical:   content centred in the circle (round) vs started from the top with
+ *               larger gaps (square); top margins grow on tall square panels and
+ *               shrink on the small round panel.
+ *   Visibility: bezel ring shown on round, linear bar shown on square (display).
+ *
+ * Lite CSS rules followed here:
+ *   - Every rule inside @media lists exactly the same properties, in the same order,
+ *     as its base rule; only values change. Breaking this can cause rendering errors.
+ *   - padding takes lengths only, and input width/height take px only, so insets use
+ *     percentage widths and margins.
+ *   - Media query sizes are physical pixels.
+ */
+
+.core {
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+}
+
+/* ===== Tier 1: round 454/466 px (base) ===== */
+
+.ring {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    stroke-width: 10px;
+    start-angle: 215deg;
+    total-angle: 290deg;
+    color: #3fa9f5;
+    background-color: #33ffffff;
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    width: 60%;
+    height: 26px;
+    margin-left: 0px;
+    margin-top: 0px;
+    font-size: 18px;
+    color: #3fa9f5;
+    text-align: center;
+}
+
+.stats {
+    width: 60%;
+    height: 88px;
+    margin-left: 0px;
+    margin-top: 4px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.count {
+    width: 100%;
+    height: 60px;
+    font-size: 48px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.label {
+    width: 100%;
+    height: 24px;
+    font-size: 16px;
+    color: #99ffffff;
+    text-align: center;
+}
+
+.bar {
+    display: none;
+    width: 90%;
+    height: 12px;
+    margin-left: 0px;
+    margin-top: 0px;
+    stroke-width: 8px;
+    color: #3fa9f5;
+}
+
+.actions {
+    width: 60%;
+    height: 90px;
+    margin-left: 0px;
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.add {
+    width: 130px;
+    height: 44px;
+    border-radius: 22px;
+    background-color: #3fa9f5;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.reset {
+    width: 110px;
+    height: 34px;
+    margin-top: 8px;
+    border-radius: 17px;
+    background-color: #33ffffff;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+/* Pressed states, shared by all tiers. */
+.add:active {
+    background-color: #2b7fbf;
+}
+
+.reset:active {
+    background-color: #55ffffff;
+}
+
+/* ===== Tier 2: small round, 390 px. Tighter vertical rhythm, smaller type. ===== */
+@media screen and (round-screen: true) and (max-width: 400) {
+    .ring {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        stroke-width: 8px;
+        start-angle: 215deg;
+        total-angle: 290deg;
+        color: #3fa9f5;
+        background-color: #33ffffff;
+    }
+
+    .content {
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .title {
+        width: 60%;
+        height: 22px;
+        margin-left: 0px;
+        margin-top: 0px;
+        font-size: 16px;
+        color: #3fa9f5;
+        text-align: center;
+    }
+
+    .stats {
+        width: 64%;
+        height: 70px;
+        margin-left: 0px;
+        margin-top: 2px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .count {
+        width: 100%;
+        height: 48px;
+        font-size: 38px;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    .label {
+        width: 100%;
+        height: 20px;
+        font-size: 14px;
+        color: #99ffffff;
+        text-align: center;
+    }
+
+    .bar {
+        display: none;
+        width: 90%;
+        height: 12px;
+        margin-left: 0px;
+        margin-top: 0px;
+        stroke-width: 8px;
+        color: #3fa9f5;
+    }
+
+    .actions {
+        width: 60%;
+        height: 76px;
+        margin-left: 0px;
+        margin-top: 6px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .add {
+        width: 116px;
+        height: 38px;
+        border-radius: 19px;
+        background-color: #3fa9f5;
+        font-size: 18px;
+        color: #ffffff;
+    }
+
+    .reset {
+        width: 100px;
+        height: 30px;
+        margin-top: 6px;
+        border-radius: 15px;
+        background-color: #33ffffff;
+        font-size: 14px;
+        color: #ffffff;
+    }
+}
+
+/* ===== Tier 3: square, 408 x 480. Ring off, bar on, rows instead of columns,
+   content anchored top-left, larger vertical gaps. ===== */
+@media screen and (round-screen: false) {
+    .ring {
+        display: none;
+        width: 100%;
+        height: 100%;
+        stroke-width: 10px;
+        start-angle: 215deg;
+        total-angle: 290deg;
+        color: #3fa9f5;
+        background-color: #33ffffff;
+    }
+
+    .content {
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .title {
+        width: 90%;
+        height: 30px;
+        margin-left: 5%;
+        margin-top: 8%;
+        font-size: 20px;
+        color: #3fa9f5;
+        text-align: left;
+    }
+
+    .stats {
+        width: 90%;
+        height: 64px;
+        margin-left: 5%;
+        margin-top: 10px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .count {
+        width: 40%;
+        height: 64px;
+        font-size: 56px;
+        color: #ffffff;
+        text-align: left;
+    }
+
+    .label {
+        width: 60%;
+        height: 26px;
+        font-size: 16px;
+        color: #99ffffff;
+        text-align: left;
+    }
+
+    .bar {
+        display: flex;
+        width: 90%;
+        height: 12px;
+        margin-left: 5%;
+        margin-top: 12px;
+        stroke-width: 8px;
+        color: #3fa9f5;
+    }
+
+    .actions {
+        width: 90%;
+        height: 48px;
+        margin-left: 5%;
+        margin-top: 14%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .add {
+        width: 140px;
+        height: 48px;
+        border-radius: 24px;
+        background-color: #3fa9f5;
+        font-size: 20px;
+        color: #ffffff;
+    }
+
+    .reset {
+        width: 140px;
+        height: 48px;
+        margin-top: 0px;
+        border-radius: 24px;
+        background-color: #33ffffff;
+        font-size: 20px;
+        color: #ffffff;
+    }
+}
+
+/* ===== Tier 4: narrow square, 336 x 480. Same structure as tier 3 with
+   smaller buttons and slightly tighter spacing. Must stay after tier 3. ===== */
+@media screen and (round-screen: false) and (max-width: 370) {
+    .ring {
+        display: none;
+        width: 100%;
+        height: 100%;
+        stroke-width: 10px;
+        start-angle: 215deg;
+        total-angle: 290deg;
+        color: #3fa9f5;
+        background-color: #33ffffff;
+    }
+
+    .content {
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .title {
+        width: 92%;
+        height: 28px;
+        margin-left: 4%;
+        margin-top: 8%;
+        font-size: 18px;
+        color: #3fa9f5;
+        text-align: left;
+    }
+
+    .stats {
+        width: 92%;
+        height: 60px;
+        margin-left: 4%;
+        margin-top: 8px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .count {
+        width: 36%;
+        height: 56px;
+        font-size: 48px;
+        color: #ffffff;
+        text-align: left;
+    }
+
+    .label {
+        width: 64%;
+        height: 24px;
+        font-size: 14px;
+        color: #99ffffff;
+        text-align: left;
+    }
+
+    .bar {
+        display: flex;
+        width: 92%;
+        height: 12px;
+        margin-left: 4%;
+        margin-top: 10px;
+        stroke-width: 8px;
+        color: #3fa9f5;
+    }
+
+    .actions {
+        width: 92%;
+        height: 44px;
+        margin-left: 4%;
+        margin-top: 12%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .add {
+        width: 128px;
+        height: 44px;
+        border-radius: 22px;
+        background-color: #3fa9f5;
+        font-size: 18px;
+        color: #ffffff;
+    }
+
+    .reset {
+        width: 128px;
+        height: 44px;
+        margin-top: 0px;
+        border-radius: 22px;
+        background-color: #33ffffff;
+        font-size: 18px;
+        color: #ffffff;
+    }
+}

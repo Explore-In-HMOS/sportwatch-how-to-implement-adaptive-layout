@@ -1,0 +1,25 @@
+<!-- One layout tree for every watch. All shape and size adaptation lives in
+     index.css (four media-query tiers); there is no shape logic in HML or JS. -->
+<stack class="core" onswipe="onPageSwipe">
+    <!-- Bezel ring: shown on round screens, hidden on square screens. -->
+    <progress type="arc" class="ring" percent="{{percent}}"></progress>
+
+    <div class="content">
+        <text class="title">{{title}}</text>
+
+        <!-- Round: count above label (column). Square: label beside count (row). -->
+        <div class="stats">
+            <text class="count">{{count}}</text>
+            <text class="label">{{statusText}}</text>
+        </div>
+
+        <!-- Linear bar: hidden on round screens, shown on square screens. -->
+        <progress type="horizontal" class="bar" percent="{{percent}}"></progress>
+
+        <!-- Round: buttons stacked (column). Square: buttons side by side (row). -->
+        <div class="actions">
+            <input type="button" class="add" value="{{addLabel}}" onclick="addGlass"></input>
+            <input type="button" class="reset" value="{{resetLabel}}" onclick="reset"></input>
+        </div>
+    </div>
+</stack>

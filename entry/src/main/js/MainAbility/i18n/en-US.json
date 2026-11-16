@@ -1,0 +1,9 @@
+{
+  "strings": {
+    "title": "Water",
+    "add": "+1 glass",
+    "reset": "Reset",
+    "goal_reached": "Goal reached!",
+    "of_goal": "of 8 glasses"
+  }
+}
