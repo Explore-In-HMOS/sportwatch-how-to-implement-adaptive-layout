@@ -2,7 +2,7 @@
 
 # How To Implement Adaptive Layout
 
-This codelab shows how to implement adaptive layouts for lite wearable devices that has round and rectangular screens. They both have different user experiences and layouts therefore they require to have some custom interfaces to provide a better experience to users. This codelab handles this case on CSS side using `@media` markers, which allows to select CSS layers conditionally according to device screen type.
+This codelab shows how to implement adaptive layouts for SportWatch devices that has round and rectangular screens. They both have different user experiences and layouts therefore they require to have some custom interfaces to provide a better experience to users. This codelab handles this case on CSS side using `@media` markers, which allows to select CSS layers conditionally according to device screen type.
 
 # Preview
 
